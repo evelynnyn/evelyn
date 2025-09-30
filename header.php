@@ -1,55 +1,28 @@
 <?php
-// week02/header.php
-$current = basename($_SERVER['PHP_SELF']);
-function nav_active($file) {
-    global $current;
-    return $current === $file ? ' active' : '';
-}
+
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>聯絡</title>
-	<style>
-		body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
-		nav {
-			background: #34495e;
-			padding: 0 0 0 32px;
-			box-shadow: 0 2px 4px #bbb;
-		}
-		nav ul {
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			display: flex;
-		}
-		nav ul li {
-			margin: 0 20px 0 0;
-		}
-		nav ul li a {
-			color: #fff;
-			text-decoration: none;
-			font-weight: bold;
-			font-size: 1.1em;
-			transition: color 0.2s;
-		}
-		nav ul li a:hover {
-			color: #f39c12;
-		}
-		.container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #ccc; padding: 32px; }
-		h1 { color: #2c3e50; }
-		p { color: #555; font-size: 1.2em; }
-		footer { text-align: center; color: #888; margin-top: 40px; }
-	</style>
-</head>
-<body>
-	<nav>
-		<ul>
-			<li><a href="0916.php">首頁</a></li>
-			<li><a href="about2.php">關於</a></li>
-			<li><a href="contact2.php">聯絡</a></li>
-		</ul>
-	</nav>
-	<div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="index.php">活動報名系統</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item">
+					<a class="nav-link <?php if($current_page=='index.php') echo 'active'; ?>" href="index.php">首頁</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link <?php if($current_page=='system.php') echo 'active'; ?>" href="system.php">活動報名系統</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link <?php if($current_page=='conference.php') echo 'active'; ?>" href="conference.php">資管一日營</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link <?php if($current_page=='status.php') echo 'active'; ?>" href="status.php">迎新茶會</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
