@@ -1,28 +1,31 @@
 <?php
-
-$current_page = basename($_SERVER['PHP_SELF']);
+session_start();
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="index.php">活動報名系統</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav ms-auto">
-				<li class="nav-item">
-					<a class="nav-link <?php if($current_page=='index.php') echo 'active'; ?>" href="index.php">首頁</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link <?php if($current_page=='system.php') echo 'active'; ?>" href="system.php">活動報名系統</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link <?php if($current_page=='conference.php') echo 'active'; ?>" href="conference.php">資管一日營</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link <?php if($current_page=='status.php') echo 'active'; ?>" href="status.php">迎新茶會</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="index.php">活動報名系統</a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="index.php">首頁</a></li>
+      <li class="nav-item"><a class="nav-link" href="status.php">迎新茶會</a></li>
+      <li class="nav-item"><a class="nav-link" href="conference.php">資管一日營</a></li>
+      <li class="nav-item">
+        <?php if(isset($_SESSION["user"])): ?>
+          <a class="nav-link" href="logout.php">登出</a>
+        <?php else: ?>
+          <a class="nav-link" href="login.php">登入</a>
+        <?php endif; ?>
+      </li>
+    </ul>
+  </div>
 </nav>
+
+<div class="container my-4">
