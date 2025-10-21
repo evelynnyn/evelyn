@@ -7,6 +7,16 @@ require_once "db.php";
 <div class="container my-4">
   <h3 class="mb-4 text-center">求才資訊</h3>
   
+  <form action="job.php" method="post">
+  <select name="order" aria-label="選擇排序欄位">
+    <option selected value="">選擇排序欄位</option>
+    <option value="company">求才廠商</option>
+    <option value="content">求才內容</option>
+    <option value="pdate">刊登日期</option>
+  </select>
+  <input class="btn btn-primary" type="submit" value="搜尋">
+  </form>
+
   <!-- 建立表格 -->
   <table id="jobTable" class="table table-bordered table-striped">
     <thead>
@@ -19,7 +29,7 @@ require_once "db.php";
     <tbody>
       <?php
       // 從資料庫讀取資料
-      $sql = "SELECT * FROM job";
+      $sql="select * from job order by pdate desc";
       $result = mysqli_query($conn, $sql);
 
       while ($row = mysqli_fetch_assoc($result)) {

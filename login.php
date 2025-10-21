@@ -1,14 +1,22 @@
 <?php
 session_start();
-include 'users.php';
+require_once 'db.php'; // ✅ 改成載入資料庫連線
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $username = $_POST["username"];
+  $account = $_POST["username"];
   $password = $_POST["password"];
 
-  if (isset($users[$username]) && $users[$username]["password"] == $password) {
-    $_SESSION["user"] = $users[$username];
-    $_SESSION["username"] = $username;
+  // ✅ 避免 SQL Injection，使用預備語法（Prepared Statement）
+  $stmt = $conn->prepare("SELECT * FROM user WHERE account = ? AND password = ?");
+  $stmt->bind_param("ss", $account, $password);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+
+    $_SESSION["user"] = $user;
+    $_SESSION["username"] = $user['account'];
 
     $redirect = $_SESSION["redirect_to"] ?? "index.php";
     unset($_SESSION["redirect_to"]);
@@ -17,6 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $error = "帳號或密碼錯誤！";
   }
+
+  $stmt->close();
+  $conn->close();
 }
 ?>
 
