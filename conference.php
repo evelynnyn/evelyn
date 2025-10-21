@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $session = $_POST["session"] ?? [];
   $fee = 0;
 
-  if ($user["role"] == "老師") {
+  if ($user["role"] == "S") {
     $fee = 0;
   } else {
     foreach ($session as $value) {
