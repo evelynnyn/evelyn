@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $_SESSION["user"] = $user;
     $_SESSION["username"] = $user['account'];
+    $_SESSION["role"] = $user['role'];
 
     $redirect = $_SESSION["redirect_to"] ?? "index.php";
     unset($_SESSION["redirect_to"]);

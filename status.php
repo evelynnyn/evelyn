@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $meal = $_POST["meal"];
   $fee = 0;
 
-  if ($user["role"] == "T") {
+  if ($user["role"] == "T" || $user["role"] == "M") {
     $fee = 0;
   } else {
     $fee = $session + ($meal == "yes" ? 60 : 0);
